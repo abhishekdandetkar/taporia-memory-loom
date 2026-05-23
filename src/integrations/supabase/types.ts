@@ -14,16 +14,302 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cms_content: {
+        Row: {
+          body: Json
+          id: string
+          section_key: string
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          body?: Json
+          id?: string
+          section_key: string
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          body?: Json
+          id?: string
+          section_key?: string
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      corporate_leads: {
+        Row: {
+          company_name: string
+          contact_name: string
+          created_at: string
+          email: string
+          employees: string | null
+          id: string
+          message: string | null
+          phone: string | null
+          status: string
+          use_case: string | null
+        }
+        Insert: {
+          company_name: string
+          contact_name: string
+          created_at?: string
+          email: string
+          employees?: string | null
+          id?: string
+          message?: string | null
+          phone?: string | null
+          status?: string
+          use_case?: string | null
+        }
+        Update: {
+          company_name?: string
+          contact_name?: string
+          created_at?: string
+          email?: string
+          employees?: string | null
+          id?: string
+          message?: string | null
+          phone?: string | null
+          status?: string
+          use_case?: string | null
+        }
+        Relationships: []
+      }
+      memory_pages: {
+        Row: {
+          created_at: string
+          id: string
+          is_published: boolean
+          media: Json
+          order_id: string | null
+          pendant_code: string
+          story: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          media?: Json
+          order_id?: string | null
+          pendant_code: string
+          story?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          media?: Json
+          order_id?: string | null
+          pendant_code?: string
+          story?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memory_pages_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          amount_inr: number
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id: string
+          memory_status: string
+          notes: string | null
+          order_status: string
+          payment_provider: string | null
+          payment_reference: string | null
+          payment_status: string
+          pendant_id: string | null
+          shipping_address: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          amount_inr: number
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id?: string
+          memory_status?: string
+          notes?: string | null
+          order_status?: string
+          payment_provider?: string | null
+          payment_reference?: string | null
+          payment_status?: string
+          pendant_id?: string | null
+          shipping_address: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          amount_inr?: number
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          id?: string
+          memory_status?: string
+          notes?: string | null
+          order_status?: string
+          payment_provider?: string | null
+          payment_reference?: string | null
+          payment_status?: string
+          pendant_id?: string | null
+          shipping_address?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      reservations: {
+        Row: {
+          city: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string | null
+          phone: string
+          status: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message?: string | null
+          phone: string
+          status?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      support_tickets: {
+        Row: {
+          category: string
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          order_id: string | null
+          status: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          order_id?: string | null
+          status?: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          order_id?: string | null
+          status?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "customer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +436,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "customer"],
+    },
   },
 } as const
