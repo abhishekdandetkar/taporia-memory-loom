@@ -9,61 +9,524 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as AdminRouteImport } from './routes/_admin'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteWhyRouteImport } from './routes/_site/why'
+import { Route as SiteTermsRouteImport } from './routes/_site/terms'
+import { Route as SiteSupportRouteImport } from './routes/_site/support'
+import { Route as SiteShippingRouteImport } from './routes/_site/shipping'
+import { Route as SiteReturnsRouteImport } from './routes/_site/returns'
+import { Route as SitePrivacyRouteImport } from './routes/_site/privacy'
+import { Route as SiteHowItWorksRouteImport } from './routes/_site/how-it-works'
+import { Route as SiteFaqsRouteImport } from './routes/_site/faqs'
+import { Route as SiteCorporateRouteImport } from './routes/_site/corporate'
+import { Route as SiteCancellationRouteImport } from './routes/_site/cancellation'
+import { Route as SiteBuyRouteImport } from './routes/_site/buy'
+import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
+import { Route as AdminAdminTicketsRouteImport } from './routes/_admin/admin.tickets'
+import { Route as AdminAdminReservationsRouteImport } from './routes/_admin/admin.reservations'
+import { Route as AdminAdminOrdersRouteImport } from './routes/_admin/admin.orders'
+import { Route as AdminAdminMemoriesRouteImport } from './routes/_admin/admin.memories'
+import { Route as AdminAdminLeadsRouteImport } from './routes/_admin/admin.leads'
+import { Route as AdminAdminCmsRouteImport } from './routes/_admin/admin.cms'
+import { Route as ApiPaymentPhonepeInitiateRouteImport } from './routes/api/payment/phonepe/initiate'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteWhyRoute = SiteWhyRouteImport.update({
+  id: '/why',
+  path: '/why',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteTermsRoute = SiteTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSupportRoute = SiteSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteShippingRoute = SiteShippingRouteImport.update({
+  id: '/shipping',
+  path: '/shipping',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteReturnsRoute = SiteReturnsRouteImport.update({
+  id: '/returns',
+  path: '/returns',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SitePrivacyRoute = SitePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteHowItWorksRoute = SiteHowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFaqsRoute = SiteFaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCorporateRoute = SiteCorporateRouteImport.update({
+  id: '/corporate',
+  path: '/corporate',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCancellationRoute = SiteCancellationRouteImport.update({
+  id: '/cancellation',
+  path: '/cancellation',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteBuyRoute = SiteBuyRouteImport.update({
+  id: '/buy',
+  path: '/buy',
+  getParentRoute: () => SiteRoute,
+} as any)
+const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminTicketsRoute = AdminAdminTicketsRouteImport.update({
+  id: '/admin/tickets',
+  path: '/admin/tickets',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminReservationsRoute = AdminAdminReservationsRouteImport.update({
+  id: '/admin/reservations',
+  path: '/admin/reservations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminOrdersRoute = AdminAdminOrdersRouteImport.update({
+  id: '/admin/orders',
+  path: '/admin/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminMemoriesRoute = AdminAdminMemoriesRouteImport.update({
+  id: '/admin/memories',
+  path: '/admin/memories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminLeadsRoute = AdminAdminLeadsRouteImport.update({
+  id: '/admin/leads',
+  path: '/admin/leads',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAdminCmsRoute = AdminAdminCmsRouteImport.update({
+  id: '/admin/cms',
+  path: '/admin/cms',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiPaymentPhonepeInitiateRoute =
+  ApiPaymentPhonepeInitiateRouteImport.update({
+    id: '/api/payment/phonepe/initiate',
+    path: '/api/payment/phonepe/initiate',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof SiteIndexRoute
+  '/auth': typeof AuthRoute
+  '/buy': typeof SiteBuyRoute
+  '/cancellation': typeof SiteCancellationRoute
+  '/corporate': typeof SiteCorporateRoute
+  '/faqs': typeof SiteFaqsRoute
+  '/how-it-works': typeof SiteHowItWorksRoute
+  '/privacy': typeof SitePrivacyRoute
+  '/returns': typeof SiteReturnsRoute
+  '/shipping': typeof SiteShippingRoute
+  '/support': typeof SiteSupportRoute
+  '/terms': typeof SiteTermsRoute
+  '/why': typeof SiteWhyRoute
+  '/admin/cms': typeof AdminAdminCmsRoute
+  '/admin/leads': typeof AdminAdminLeadsRoute
+  '/admin/memories': typeof AdminAdminMemoriesRoute
+  '/admin/orders': typeof AdminAdminOrdersRoute
+  '/admin/reservations': typeof AdminAdminReservationsRoute
+  '/admin/tickets': typeof AdminAdminTicketsRoute
+  '/admin/': typeof AdminAdminIndexRoute
+  '/api/payment/phonepe/initiate': typeof ApiPaymentPhonepeInitiateRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof SiteIndexRoute
+  '/auth': typeof AuthRoute
+  '/buy': typeof SiteBuyRoute
+  '/cancellation': typeof SiteCancellationRoute
+  '/corporate': typeof SiteCorporateRoute
+  '/faqs': typeof SiteFaqsRoute
+  '/how-it-works': typeof SiteHowItWorksRoute
+  '/privacy': typeof SitePrivacyRoute
+  '/returns': typeof SiteReturnsRoute
+  '/shipping': typeof SiteShippingRoute
+  '/support': typeof SiteSupportRoute
+  '/terms': typeof SiteTermsRoute
+  '/why': typeof SiteWhyRoute
+  '/admin/cms': typeof AdminAdminCmsRoute
+  '/admin/leads': typeof AdminAdminLeadsRoute
+  '/admin/memories': typeof AdminAdminMemoriesRoute
+  '/admin/orders': typeof AdminAdminOrdersRoute
+  '/admin/reservations': typeof AdminAdminReservationsRoute
+  '/admin/tickets': typeof AdminAdminTicketsRoute
+  '/admin': typeof AdminAdminIndexRoute
+  '/api/payment/phonepe/initiate': typeof ApiPaymentPhonepeInitiateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
+  '/_site': typeof SiteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_site/buy': typeof SiteBuyRoute
+  '/_site/cancellation': typeof SiteCancellationRoute
+  '/_site/corporate': typeof SiteCorporateRoute
+  '/_site/faqs': typeof SiteFaqsRoute
+  '/_site/how-it-works': typeof SiteHowItWorksRoute
+  '/_site/privacy': typeof SitePrivacyRoute
+  '/_site/returns': typeof SiteReturnsRoute
+  '/_site/shipping': typeof SiteShippingRoute
+  '/_site/support': typeof SiteSupportRoute
+  '/_site/terms': typeof SiteTermsRoute
+  '/_site/why': typeof SiteWhyRoute
+  '/_site/': typeof SiteIndexRoute
+  '/_admin/admin/cms': typeof AdminAdminCmsRoute
+  '/_admin/admin/leads': typeof AdminAdminLeadsRoute
+  '/_admin/admin/memories': typeof AdminAdminMemoriesRoute
+  '/_admin/admin/orders': typeof AdminAdminOrdersRoute
+  '/_admin/admin/reservations': typeof AdminAdminReservationsRoute
+  '/_admin/admin/tickets': typeof AdminAdminTicketsRoute
+  '/_admin/admin/': typeof AdminAdminIndexRoute
+  '/api/payment/phonepe/initiate': typeof ApiPaymentPhonepeInitiateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/buy'
+    | '/cancellation'
+    | '/corporate'
+    | '/faqs'
+    | '/how-it-works'
+    | '/privacy'
+    | '/returns'
+    | '/shipping'
+    | '/support'
+    | '/terms'
+    | '/why'
+    | '/admin/cms'
+    | '/admin/leads'
+    | '/admin/memories'
+    | '/admin/orders'
+    | '/admin/reservations'
+    | '/admin/tickets'
+    | '/admin/'
+    | '/api/payment/phonepe/initiate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/buy'
+    | '/cancellation'
+    | '/corporate'
+    | '/faqs'
+    | '/how-it-works'
+    | '/privacy'
+    | '/returns'
+    | '/shipping'
+    | '/support'
+    | '/terms'
+    | '/why'
+    | '/admin/cms'
+    | '/admin/leads'
+    | '/admin/memories'
+    | '/admin/orders'
+    | '/admin/reservations'
+    | '/admin/tickets'
+    | '/admin'
+    | '/api/payment/phonepe/initiate'
+  id:
+    | '__root__'
+    | '/_admin'
+    | '/_site'
+    | '/auth'
+    | '/_site/buy'
+    | '/_site/cancellation'
+    | '/_site/corporate'
+    | '/_site/faqs'
+    | '/_site/how-it-works'
+    | '/_site/privacy'
+    | '/_site/returns'
+    | '/_site/shipping'
+    | '/_site/support'
+    | '/_site/terms'
+    | '/_site/why'
+    | '/_site/'
+    | '/_admin/admin/cms'
+    | '/_admin/admin/leads'
+    | '/_admin/admin/memories'
+    | '/_admin/admin/orders'
+    | '/_admin/admin/reservations'
+    | '/_admin/admin/tickets'
+    | '/_admin/admin/'
+    | '/api/payment/phonepe/initiate'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  SiteRoute: typeof SiteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ApiPaymentPhonepeInitiateRoute: typeof ApiPaymentPhonepeInitiateRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/why': {
+      id: '/_site/why'
+      path: '/why'
+      fullPath: '/why'
+      preLoaderRoute: typeof SiteWhyRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/terms': {
+      id: '/_site/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof SiteTermsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/support': {
+      id: '/_site/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SiteSupportRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/shipping': {
+      id: '/_site/shipping'
+      path: '/shipping'
+      fullPath: '/shipping'
+      preLoaderRoute: typeof SiteShippingRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/returns': {
+      id: '/_site/returns'
+      path: '/returns'
+      fullPath: '/returns'
+      preLoaderRoute: typeof SiteReturnsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/privacy': {
+      id: '/_site/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof SitePrivacyRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/how-it-works': {
+      id: '/_site/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof SiteHowItWorksRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/faqs': {
+      id: '/_site/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof SiteFaqsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/corporate': {
+      id: '/_site/corporate'
+      path: '/corporate'
+      fullPath: '/corporate'
+      preLoaderRoute: typeof SiteCorporateRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/cancellation': {
+      id: '/_site/cancellation'
+      path: '/cancellation'
+      fullPath: '/cancellation'
+      preLoaderRoute: typeof SiteCancellationRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/buy': {
+      id: '/_site/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof SiteBuyRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_admin/admin/': {
+      id: '/_admin/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminAdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/tickets': {
+      id: '/_admin/admin/tickets'
+      path: '/admin/tickets'
+      fullPath: '/admin/tickets'
+      preLoaderRoute: typeof AdminAdminTicketsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/reservations': {
+      id: '/_admin/admin/reservations'
+      path: '/admin/reservations'
+      fullPath: '/admin/reservations'
+      preLoaderRoute: typeof AdminAdminReservationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/orders': {
+      id: '/_admin/admin/orders'
+      path: '/admin/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminAdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/memories': {
+      id: '/_admin/admin/memories'
+      path: '/admin/memories'
+      fullPath: '/admin/memories'
+      preLoaderRoute: typeof AdminAdminMemoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/leads': {
+      id: '/_admin/admin/leads'
+      path: '/admin/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminAdminLeadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/admin/cms': {
+      id: '/_admin/admin/cms'
+      path: '/admin/cms'
+      fullPath: '/admin/cms'
+      preLoaderRoute: typeof AdminAdminCmsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/payment/phonepe/initiate': {
+      id: '/api/payment/phonepe/initiate'
+      path: '/api/payment/phonepe/initiate'
+      fullPath: '/api/payment/phonepe/initiate'
+      preLoaderRoute: typeof ApiPaymentPhonepeInitiateRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAdminCmsRoute: typeof AdminAdminCmsRoute
+  AdminAdminLeadsRoute: typeof AdminAdminLeadsRoute
+  AdminAdminMemoriesRoute: typeof AdminAdminMemoriesRoute
+  AdminAdminOrdersRoute: typeof AdminAdminOrdersRoute
+  AdminAdminReservationsRoute: typeof AdminAdminReservationsRoute
+  AdminAdminTicketsRoute: typeof AdminAdminTicketsRoute
+  AdminAdminIndexRoute: typeof AdminAdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdminCmsRoute: AdminAdminCmsRoute,
+  AdminAdminLeadsRoute: AdminAdminLeadsRoute,
+  AdminAdminMemoriesRoute: AdminAdminMemoriesRoute,
+  AdminAdminOrdersRoute: AdminAdminOrdersRoute,
+  AdminAdminReservationsRoute: AdminAdminReservationsRoute,
+  AdminAdminTicketsRoute: AdminAdminTicketsRoute,
+  AdminAdminIndexRoute: AdminAdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface SiteRouteChildren {
+  SiteBuyRoute: typeof SiteBuyRoute
+  SiteCancellationRoute: typeof SiteCancellationRoute
+  SiteCorporateRoute: typeof SiteCorporateRoute
+  SiteFaqsRoute: typeof SiteFaqsRoute
+  SiteHowItWorksRoute: typeof SiteHowItWorksRoute
+  SitePrivacyRoute: typeof SitePrivacyRoute
+  SiteReturnsRoute: typeof SiteReturnsRoute
+  SiteShippingRoute: typeof SiteShippingRoute
+  SiteSupportRoute: typeof SiteSupportRoute
+  SiteTermsRoute: typeof SiteTermsRoute
+  SiteWhyRoute: typeof SiteWhyRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteBuyRoute: SiteBuyRoute,
+  SiteCancellationRoute: SiteCancellationRoute,
+  SiteCorporateRoute: SiteCorporateRoute,
+  SiteFaqsRoute: SiteFaqsRoute,
+  SiteHowItWorksRoute: SiteHowItWorksRoute,
+  SitePrivacyRoute: SitePrivacyRoute,
+  SiteReturnsRoute: SiteReturnsRoute,
+  SiteShippingRoute: SiteShippingRoute,
+  SiteSupportRoute: SiteSupportRoute,
+  SiteTermsRoute: SiteTermsRoute,
+  SiteWhyRoute: SiteWhyRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  SiteRoute: SiteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ApiPaymentPhonepeInitiateRoute: ApiPaymentPhonepeInitiateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
