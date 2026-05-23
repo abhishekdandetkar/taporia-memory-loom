@@ -10,32 +10,116 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteWhyRouteImport } from './routes/_site/why'
+import { Route as SiteSupportRouteImport } from './routes/_site/support'
+import { Route as SiteHowItWorksRouteImport } from './routes/_site/how-it-works'
+import { Route as SiteFaqsRouteImport } from './routes/_site/faqs'
+import { Route as SiteCorporateRouteImport } from './routes/_site/corporate'
+import { Route as SiteBuyRouteImport } from './routes/_site/buy'
 
 const SiteRoute = SiteRouteImport.update({
   id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteWhyRoute = SiteWhyRouteImport.update({
+  id: '/why',
+  path: '/why',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSupportRoute = SiteSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteHowItWorksRoute = SiteHowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteFaqsRoute = SiteFaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCorporateRoute = SiteCorporateRouteImport.update({
+  id: '/corporate',
+  path: '/corporate',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteBuyRoute = SiteBuyRouteImport.update({
+  id: '/buy',
+  path: '/buy',
+  getParentRoute: () => SiteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof SiteRoute
+  '/': typeof SiteIndexRoute
+  '/buy': typeof SiteBuyRoute
+  '/corporate': typeof SiteCorporateRoute
+  '/faqs': typeof SiteFaqsRoute
+  '/how-it-works': typeof SiteHowItWorksRoute
+  '/support': typeof SiteSupportRoute
+  '/why': typeof SiteWhyRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof SiteRoute
+  '/buy': typeof SiteBuyRoute
+  '/corporate': typeof SiteCorporateRoute
+  '/faqs': typeof SiteFaqsRoute
+  '/how-it-works': typeof SiteHowItWorksRoute
+  '/support': typeof SiteSupportRoute
+  '/why': typeof SiteWhyRoute
+  '/': typeof SiteIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_site': typeof SiteRoute
+  '/_site': typeof SiteRouteWithChildren
+  '/_site/buy': typeof SiteBuyRoute
+  '/_site/corporate': typeof SiteCorporateRoute
+  '/_site/faqs': typeof SiteFaqsRoute
+  '/_site/how-it-works': typeof SiteHowItWorksRoute
+  '/_site/support': typeof SiteSupportRoute
+  '/_site/why': typeof SiteWhyRoute
+  '/_site/': typeof SiteIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/buy'
+    | '/corporate'
+    | '/faqs'
+    | '/how-it-works'
+    | '/support'
+    | '/why'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_site'
+  to:
+    | '/buy'
+    | '/corporate'
+    | '/faqs'
+    | '/how-it-works'
+    | '/support'
+    | '/why'
+    | '/'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/_site/buy'
+    | '/_site/corporate'
+    | '/_site/faqs'
+    | '/_site/how-it-works'
+    | '/_site/support'
+    | '/_site/why'
+    | '/_site/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  SiteRoute: typeof SiteRoute
+  SiteRoute: typeof SiteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -47,11 +131,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_site/': {
+      id: '/_site/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/why': {
+      id: '/_site/why'
+      path: '/why'
+      fullPath: '/why'
+      preLoaderRoute: typeof SiteWhyRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/support': {
+      id: '/_site/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SiteSupportRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/how-it-works': {
+      id: '/_site/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof SiteHowItWorksRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/faqs': {
+      id: '/_site/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof SiteFaqsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/corporate': {
+      id: '/_site/corporate'
+      path: '/corporate'
+      fullPath: '/corporate'
+      preLoaderRoute: typeof SiteCorporateRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/buy': {
+      id: '/_site/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof SiteBuyRouteImport
+      parentRoute: typeof SiteRoute
+    }
   }
 }
 
+interface SiteRouteChildren {
+  SiteBuyRoute: typeof SiteBuyRoute
+  SiteCorporateRoute: typeof SiteCorporateRoute
+  SiteFaqsRoute: typeof SiteFaqsRoute
+  SiteHowItWorksRoute: typeof SiteHowItWorksRoute
+  SiteSupportRoute: typeof SiteSupportRoute
+  SiteWhyRoute: typeof SiteWhyRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteBuyRoute: SiteBuyRoute,
+  SiteCorporateRoute: SiteCorporateRoute,
+  SiteFaqsRoute: SiteFaqsRoute,
+  SiteHowItWorksRoute: SiteHowItWorksRoute,
+  SiteSupportRoute: SiteSupportRoute,
+  SiteWhyRoute: SiteWhyRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  SiteRoute: SiteRoute,
+  SiteRoute: SiteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
