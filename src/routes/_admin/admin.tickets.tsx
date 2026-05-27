@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 const dateFmt = (v: any) => v ? new Date(v).toLocaleDateString() : "";
 
 export const Route = createFileRoute("/_admin/admin/tickets")({
+  head: () => ({ meta: [{ title: "Support Tickets — Admin · TAPORIA" }] }),
+
   component: () => {
     const { data, isLoading } = useQuery({ queryKey: ["admin", "tickets"], queryFn: async () => {
       const { data, error } = await supabase.from("support_tickets").select("*").order("created_at", { ascending: false }).limit(500);

@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_admin/admin/memories")({
+  head: () => ({ meta: [{ title: "Memory Pages — Admin · TAPORIA" }] }),
+
   component: () => {
     const { data, isLoading } = useQuery({ queryKey: ["memories"], queryFn: async () => {
       const { data, error } = await supabase.from("memory_pages").select("*").order("created_at", { ascending: false });
