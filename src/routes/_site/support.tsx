@@ -12,11 +12,16 @@ export const Route = createFileRoute("/_site/support")({
   head: () => ({
     meta: [
       { title: "Support — TAPORIA" },
-      { name: "description", content: "Get help with your TAPORIA order, delivery, or memory page." },
+      { name: "description", content: "Get help with your TAPORIA order, delivery, or memory page. Our team responds within 24 hours." },
+      { property: "og:title", content: "TAPORIA — Support" },
+      { property: "og:description", content: "We respond within 24 hours." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/support" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/support" }],
   }),
   component: Support,
 });
+
 
 const schema = z.object({
   name: z.string().trim().min(2).max(100),
@@ -78,8 +83,10 @@ function Support() {
                 ["order_id", "Order ID (optional)", "text"],
               ].map(([k, l, type]) => (
                 <div key={k} className="bg-black p-6">
-                  <label className="text-eyebrow opacity-50 block">{l}</label>
+                  <label htmlFor={`sup-${k}`} className="text-eyebrow opacity-50 block">{l}</label>
                   <input
+                    id={`sup-${k}`}
+                    name={k}
                     type={type}
                     value={(form as any)[k]}
                     onChange={(e) => setForm({ ...form, [k]: e.target.value })}
@@ -88,8 +95,10 @@ function Support() {
                 </div>
               ))}
               <div className="bg-black p-6">
-                <label className="text-eyebrow opacity-50 block">Category</label>
+                <label htmlFor="sup-category" className="text-eyebrow opacity-50 block">Category</label>
                 <select
+                  id="sup-category"
+                  name="category"
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value as any })}
                   className="mt-3 w-full bg-black border-b border-white/50 focus:border-white outline-none py-3 text-base text-white"
@@ -101,22 +110,27 @@ function Support() {
                 </select>
               </div>
               <div className="bg-black p-6 md:col-span-2">
-                <label className="text-eyebrow opacity-50 block">Subject</label>
+                <label htmlFor="sup-subject" className="text-eyebrow opacity-50 block">Subject</label>
                 <input
+                  id="sup-subject"
+                  name="subject"
                   value={form.subject}
                   onChange={(e) => setForm({ ...form, subject: e.target.value })}
                   className="mt-3 w-full bg-transparent border-b border-white/50 focus:border-white outline-none py-3 text-base"
                 />
               </div>
               <div className="bg-black p-6 md:col-span-2">
-                <label className="text-eyebrow opacity-50 block">Message</label>
+                <label htmlFor="sup-message" className="text-eyebrow opacity-50 block">Message</label>
                 <textarea
+                  id="sup-message"
+                  name="message"
                   rows={6}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   className="mt-3 w-full bg-transparent border-b border-white/50 focus:border-white outline-none py-3 text-base resize-none"
                 />
               </div>
+
               <div className="bg-black md:col-span-2 p-6 flex justify-end">
                 <button disabled={loading} className="btn-tap btn-tap-ghost">
                   {loading ? "Sending…" : "Send Ticket"}

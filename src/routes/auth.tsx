@@ -5,9 +5,15 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign In — TAPORIA" }] }),
+  head: () => ({
+    meta: [
+      { title: "Sign In — TAPORIA" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: Auth,
 });
+
 
 const emailSchema = z.string().trim().email().max(255);
 const passwordSchema = z.string().min(6).max(72);

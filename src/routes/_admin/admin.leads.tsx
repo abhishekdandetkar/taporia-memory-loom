@@ -29,6 +29,8 @@ function Table({ title, rows, isLoading, cols }: any) {
 }
 
 export const Route = createFileRoute("/_admin/admin/leads")({
+  head: () => ({ meta: [{ title: "Corporate Leads — Admin · TAPORIA" }] }),
+
   component: () => { const { data, isLoading } = useList("corporate_leads");
     return <Table title="Corporate Leads" rows={data} isLoading={isLoading} cols={[
       { key: "created_at", label: "Date", fmt: dateFmt }, { key: "company_name", label: "Company" },

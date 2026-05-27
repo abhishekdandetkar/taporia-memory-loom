@@ -12,14 +12,38 @@ import wornPortrait from "@/assets/worn-portrait.jpg";
 export const Route = createFileRoute("/_site/buy")({
   head: () => ({
     meta: [
-      { title: "Buy TAPORIA — Founders Edition" },
-      { name: "description", content: "Reserve your TAPORIA pendant. Handcrafted stainless steel with a hidden NFC memory core. INR 4,999 — Founders Edition." },
+      { title: "Buy TAPORIA — Founders Edition Memory Pendant" },
+      { name: "description", content: "Reserve your TAPORIA pendant. Handcrafted stainless steel with a hidden NFC memory core. INR 4,999 — Founders Edition, limited to 100 pieces." },
       { property: "og:title", content: "TAPORIA — Founders Edition" },
       { property: "og:description", content: "Handcrafted memory pendant. Limited to 100 pieces." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/buy" },
+      { property: "og:type", content: "product" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/buy" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "TAPORIA Founders Edition Pendant",
+          description: "Handcrafted 316L stainless steel memory pendant with a hidden NFC core. Tap any smartphone to open a private memory page.",
+          brand: { "@type": "Brand", name: "TAPORIA" },
+          image: "https://taporia-memory-loom.lovable.app/og-buy.jpg",
+          offers: {
+            "@type": "Offer",
+            price: "4999",
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: "https://taporia-memory-loom.lovable.app/buy",
+          },
+        }),
+      },
     ],
   }),
   component: Buy,
 });
+
 
 const PRICE_INR = 4999;
 
@@ -116,7 +140,7 @@ function Buy() {
           ].map(([t, d], i) => (
             <Reveal key={t} className="bg-white p-10 md:p-14" delay={i}>
               <p className="text-eyebrow opacity-50">{String(i + 1).padStart(2, "0")}</p>
-              <h3 className="text-display mt-6 text-2xl">{t}</h3>
+              <h2 className="text-display mt-6 text-2xl">{t}</h2>
               <p className="mt-4 text-sm font-light opacity-80 leading-relaxed">{d}</p>
             </Reveal>
           ))}
@@ -126,9 +150,13 @@ function Buy() {
       {/* GALLERY */}
       <section className="bg-white py-32">
         <div className="container-edge grid grid-cols-1 md:grid-cols-3 gap-px bg-black">
-          {[pendantBack, packaging, wornPortrait].map((src, i) => (
+          {[
+            [pendantBack, "Engraved back of the TAPORIA pendant"],
+            [packaging, "Handcrafted TAPORIA pendant packaging detail"],
+            [wornPortrait, "TAPORIA pendant worn lifestyle portrait"],
+          ].map(([src, alt], i) => (
             <Reveal key={i} className="bg-white" delay={i}>
-              <img src={src} alt="TAPORIA detail" loading="lazy" width={1600} height={1200} className="w-full h-auto" />
+              <img src={src as string} alt={alt as string} loading="lazy" width={1600} height={1200} className="w-full h-auto" />
             </Reveal>
           ))}
         </div>
@@ -140,6 +168,7 @@ function Buy() {
           <Reveal className="lg:col-span-5">
             <p className="text-eyebrow opacity-60">Reserve · ₹{PRICE_INR.toLocaleString("en-IN")}</p>
             <h2 className="text-display mt-6 text-5xl md:text-6xl">Claim<br />Your Piece.</h2>
+
             <p className="mt-8 text-sm font-light opacity-70 max-w-md leading-relaxed">
               Payment is handled securely by PhonePe (UPI, cards, net banking).
               You will be guided through memory upload after checkout.
@@ -154,8 +183,10 @@ function Buy() {
                 ["customer_phone", "Phone", "tel"],
               ].map(([k, label, type]) => (
                 <div key={k} className="bg-black p-6">
-                  <label className="text-eyebrow opacity-50 block">{label}</label>
+                  <label htmlFor={`buy-${k}`} className="text-eyebrow opacity-50 block">{label}</label>
                   <input
+                    id={`buy-${k}`}
+                    name={k}
                     type={type}
                     required
                     value={(form as any)[k]}
@@ -165,12 +196,14 @@ function Buy() {
                 </div>
               ))}
               <div className="bg-black p-6 md:col-span-1">
-                <label className="text-eyebrow opacity-50 block">Edition</label>
+                <p className="text-eyebrow opacity-50 block">Edition</p>
                 <div className="mt-3 py-3 text-base">Founders Edition · 01 / 100</div>
               </div>
               <div className="bg-black p-6 md:col-span-2">
-                <label className="text-eyebrow opacity-50 block">Shipping Address</label>
+                <label htmlFor="buy-shipping_address" className="text-eyebrow opacity-50 block">Shipping Address</label>
                 <textarea
+                  id="buy-shipping_address"
+                  name="shipping_address"
                   required
                   rows={4}
                   value={form.shipping_address}
@@ -178,6 +211,7 @@ function Buy() {
                   className="mt-3 w-full bg-transparent border-b border-white/50 focus:border-white outline-none py-3 text-base text-white resize-none"
                 />
               </div>
+
               <div className="bg-black md:col-span-2 p-6 flex items-center justify-between">
                 <div className="text-xs uppercase tracking-[0.25em] opacity-70">
                   By reserving, you agree to our terms.

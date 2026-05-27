@@ -40,6 +40,7 @@ function AdminTable({ title, table, columns, order = "created_at" }: { title: st
 }
 
 export const Route = createFileRoute("/_admin/admin/orders")({
+  head: () => ({ meta: [{ title: "Orders — Admin · TAPORIA" }] }),
   component: () => <AdminTable title="Orders" table="orders" columns={[
     { key: "created_at", label: "Date", render: (v) => new Date(v).toLocaleDateString() },
     { key: "customer_name", label: "Customer" },
@@ -50,3 +51,4 @@ export const Route = createFileRoute("/_admin/admin/orders")({
     { key: "order_status", label: "Status" },
   ]} />,
 });
+

@@ -8,14 +8,17 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_site/corporate")({
   head: () => ({
     meta: [
-      { title: "Corporate Deals — TAPORIA" },
-      { name: "description", content: "Premium memory pendants for teams, milestones, and corporate gifting. Inquire for bulk orders." },
+      { title: "Corporate Gifting — TAPORIA Memory Pendants" },
+      { name: "description", content: "Premium handcrafted memory pendants for teams, milestones, and corporate gifting. Personalised, engraved, and quietly luxurious — inquire for bulk orders." },
       { property: "og:title", content: "TAPORIA — Corporate Gifting" },
       { property: "og:description", content: "A meaningful gift, not a giveaway." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/corporate" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/corporate" }],
   }),
   component: Corporate,
 });
+
 
 const schema = z.object({
   company_name: z.string().trim().min(2).max(150),
@@ -85,7 +88,7 @@ function Corporate() {
           ].map(([t, d], i) => (
             <Reveal key={t} className="bg-white p-10" delay={i}>
               <p className="text-eyebrow opacity-50">{String(i + 1).padStart(2, "0")}</p>
-              <h3 className="text-display mt-6 text-2xl">{t}</h3>
+              <h2 className="text-display mt-6 text-2xl">{t}</h2>
               <p className="mt-3 text-sm opacity-80 font-light">{d}</p>
             </Reveal>
           ))}
@@ -114,8 +117,10 @@ function Corporate() {
                 ["use_case", "Use Case"],
               ].map(([k, l]) => (
                 <div key={k} className="bg-black p-6">
-                  <label className="text-eyebrow opacity-50 block">{l}</label>
+                  <label htmlFor={`corp-${k}`} className="text-eyebrow opacity-50 block">{l}</label>
                   <input
+                    id={`corp-${k}`}
+                    name={k}
                     value={(form as any)[k]}
                     onChange={(e) => setForm({ ...form, [k]: e.target.value })}
                     className="mt-3 w-full bg-transparent border-b border-white/50 focus:border-white outline-none py-3 text-base"
@@ -123,8 +128,10 @@ function Corporate() {
                 </div>
               ))}
               <div className="bg-black p-6 md:col-span-2">
-                <label className="text-eyebrow opacity-50 block">Message</label>
+                <label htmlFor="corp-message" className="text-eyebrow opacity-50 block">Message</label>
                 <textarea
+                  id="corp-message"
+                  name="message"
                   rows={5}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -143,3 +150,4 @@ function Corporate() {
     </div>
   );
 }
+

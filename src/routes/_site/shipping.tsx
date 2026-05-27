@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalLayout } from "@/components/site/LegalLayout";
 
 export const Route = createFileRoute("/_site/shipping")({
-  head: () => ({ meta: [{ title: "Shipping Policy — TAPORIA" }, { name: "description", content: "How TAPORIA ships handcrafted memory pendants." }] }),
+  head: () => ({
+    meta: [
+      { title: "Shipping Policy — TAPORIA" },
+      { name: "description", content: "How TAPORIA ships handcrafted memory pendants. Founders Edition pieces dispatch within 3–4 weeks across India, with email and SMS tracking." },
+      { property: "og:title", content: "TAPORIA — Shipping Policy" },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/shipping" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/shipping" }],
+  }),
+
   component: () => (
     <LegalLayout eyebrow="Legal" title="Shipping Policy">
       <h2>Timelines</h2>

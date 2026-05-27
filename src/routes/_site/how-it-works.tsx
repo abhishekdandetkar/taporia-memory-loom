@@ -8,14 +8,17 @@ import pendantBack from "@/assets/pendant-back.jpg";
 export const Route = createFileRoute("/_site/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How It Works — TAPORIA" },
-      { name: "description", content: "Choose your pendant. Upload your memories. We craft your experience. Tap to relive." },
+      { title: "How It Works — TAPORIA Memory Pendants" },
+      { name: "description", content: "Choose your pendant, upload your memories, we craft your experience, and you tap to relive. Four steps from a moment to a lifelong keepsake." },
       { property: "og:title", content: "How TAPORIA Works" },
       { property: "og:description", content: "Four steps from a moment to a keepsake." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/how-it-works" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/how-it-works" }],
   }),
   component: HowItWorks,
 });
+
 
 const STEPS = [
   { n: "01", t: "Choose Your Pendant", d: "Reserve a piece from the Founders Edition. Each one is numbered, engraved, and made to last." , img: pendantBack},

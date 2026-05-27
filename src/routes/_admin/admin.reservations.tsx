@@ -38,6 +38,8 @@ function Table({ title, rows, isLoading, cols }: { title: string; rows: any[] | 
 const dateFmt = (v: any) => v ? new Date(v).toLocaleDateString() : "";
 
 export const Route = createFileRoute("/_admin/admin/reservations")({
+  head: () => ({ meta: [{ title: "Reservations — Admin · TAPORIA" }] }),
+
   component: () => {
     const { data, isLoading } = useList("reservations");
     return <Table title="Reservations" rows={data} isLoading={isLoading} cols={[

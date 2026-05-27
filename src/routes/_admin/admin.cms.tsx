@@ -4,7 +4,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/_admin/admin/cms")({ component: CMS });
+export const Route = createFileRoute("/_admin/admin/cms")({
+  head: () => ({ meta: [{ title: "CMS — Admin · TAPORIA" }] }),
+  component: CMS,
+});
+
 
 function CMS() {
   const qc = useQueryClient();
