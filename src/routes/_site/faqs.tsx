@@ -2,17 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { useState } from "react";
 
-export const Route = createFileRoute("/_site/faqs")({
-  head: () => ({
-    meta: [
-      { title: "FAQs — TAPORIA" },
-      { name: "description", content: "Answers about TAPORIA pendants, NFC, shipping, and the Founders Edition." },
-    ],
-  }),
-  component: FAQs,
-});
-
-const FAQ = [
+const FAQ: [string, string][] = [
   ["What is TAPORIA?", "A handcrafted memory pendant with a hidden NFC core. Tap it on any smartphone and a personalised page of your photographs, voice notes, music, and messages opens."],
   ["Do I need an app?", "No. The pendant works with the native NFC reader built into every modern smartphone. Tap and the page opens in your browser."],
   ["Is it waterproof?", "Yes. The 316L stainless steel body and sealed NFC core are designed for everyday wear, including showering."],
@@ -22,6 +12,35 @@ const FAQ = [
   ["Can I gift it?", "Yes — corporate or personal. Use our Corporate page for bulk inquiries."],
   ["What if my pendant is damaged?", "Reach out to support. We repair or replace as appropriate within the warranty terms."],
 ];
+
+export const Route = createFileRoute("/_site/faqs")({
+  head: () => ({
+    meta: [
+      { title: "FAQs — TAPORIA Memory Pendants" },
+      { name: "description", content: "Answers about TAPORIA pendants, the hidden NFC technology, shipping timelines, and the limited Founders Edition." },
+      { property: "og:title", content: "TAPORIA — Frequently Asked Questions" },
+      { property: "og:description", content: "Everything about the pendant, NFC, and your memory page." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/faqs" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/faqs" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map(([q, a]) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        }),
+      },
+    ],
+  }),
+  component: FAQs,
+});
+
 
 function FAQs() {
   const [open, setOpen] = useState<number | null>(0);

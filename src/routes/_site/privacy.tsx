@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalLayout } from "@/components/site/LegalLayout";
 
 export const Route = createFileRoute("/_site/privacy")({
-  head: () => ({ meta: [{ title: "Privacy Policy — TAPORIA" }, { name: "description", content: "How TAPORIA handles your data, memories, and privacy." }] }),
+  head: () => ({
+    meta: [
+      { title: "Privacy Policy — TAPORIA" },
+      { name: "description", content: "How TAPORIA handles your data, memories, and privacy. We never sell or share your data, and your memory page is private to your pendant." },
+      { property: "og:title", content: "TAPORIA — Privacy Policy" },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/privacy" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/privacy" }],
+  }),
+
   component: () => (
     <LegalLayout eyebrow="Legal" title="Privacy Policy">
       <p>Last updated: {new Date().getFullYear()}</p>

@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalLayout } from "@/components/site/LegalLayout";
 
 export const Route = createFileRoute("/_site/cancellation")({
-  head: () => ({ meta: [{ title: "Cancellation Policy — TAPORIA" }, { name: "description", content: "How to cancel a TAPORIA order." }] }),
+  head: () => ({
+    meta: [
+      { title: "Cancellation Policy — TAPORIA" },
+      { name: "description", content: "How to cancel a TAPORIA order. Full refund within 24 hours of purchase before crafting begins; non-refundable once handcrafting has started." },
+      { property: "og:title", content: "TAPORIA — Cancellation Policy" },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/cancellation" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/cancellation" }],
+  }),
+
   component: () => (
     <LegalLayout eyebrow="Legal" title="Cancellation Policy">
       <h2>Before crafting begins</h2>

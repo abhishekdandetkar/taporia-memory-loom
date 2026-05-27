@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LegalLayout } from "@/components/site/LegalLayout";
 
 export const Route = createFileRoute("/_site/terms")({
-  head: () => ({ meta: [{ title: "Terms & Conditions — TAPORIA" }, { name: "description", content: "Terms governing the use of TAPORIA products and services." }] }),
+  head: () => ({
+    meta: [
+      { title: "Terms & Conditions — TAPORIA" },
+      { name: "description", content: "Terms governing the use of TAPORIA products, the memory page service, and your purchase. Read these terms before placing an order." },
+      { property: "og:title", content: "TAPORIA — Terms & Conditions" },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/terms" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/terms" }],
+  }),
+
   component: () => (
     <LegalLayout eyebrow="Legal" title="Terms & Conditions">
       <p>By placing an order, you agree to these terms.</p>
