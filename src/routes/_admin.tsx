@@ -3,8 +3,15 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_admin")({
+  head: () => ({
+    meta: [
+      { title: "Admin — TAPORIA" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: AdminLayout,
 });
+
 
 function AdminLayout() {
   const navigate = useNavigate();
