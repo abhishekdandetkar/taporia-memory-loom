@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_admin/admin/")({
+  head: () => ({ meta: [{ title: "Overview — Admin · TAPORIA" }] }),
   component: Overview,
 });
+
 
 function Card({ label, value }: { label: string; value: number | string }) {
   return (
