@@ -1,0 +1,21 @@
+# TAPORIA
+
+> TAPORIA crafts premium handcrafted stainless steel memory pendants with a hidden NFC core. One tap on any smartphone opens a private memory page of photographs, voice notes, music, and messages.
+
+## Pages
+
+- [Home](/): One tap to your memories — Founders Edition memory pendant.
+- [Buy](/buy): Reserve a Founders Edition pendant. INR 4,999, limited to 100 pieces.
+- [How It Works](/how-it-works): Four steps from a moment to a keepsake.
+- [Why TAPORIA](/why): The philosophy behind the keepsake.
+- [Corporate](/corporate): Bulk and corporate gifting inquiries.
+- [FAQs](/faqs): Common questions about the pendant, NFC, shipping, and the memory page.
+- [Support](/support): Get help with an order, delivery, or memory page.
+
+## Optional
+
+- [Shipping](/shipping): Dispatch timelines and coverage.
+- [Returns & Refunds](/returns): Return and refund policy.
+- [Cancellation](/cancellation): Order cancellation policy.
+- [Privacy](/privacy): How TAPORIA handles your data.
+- [Terms](/terms): Terms governing TAPORIA products and services.

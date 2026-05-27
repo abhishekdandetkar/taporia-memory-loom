@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as AdminRouteImport } from './routes/_admin'
@@ -33,6 +34,11 @@ import { Route as AdminAdminLeadsRouteImport } from './routes/_admin/admin.leads
 import { Route as AdminAdminCmsRouteImport } from './routes/_admin/admin.cms'
 import { Route as ApiPaymentPhonepeInitiateRouteImport } from './routes/api/payment/phonepe/initiate'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -151,6 +157,7 @@ const ApiPaymentPhonepeInitiateRoute =
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/buy': typeof SiteBuyRoute
   '/cancellation': typeof SiteCancellationRoute
   '/corporate': typeof SiteCorporateRoute
@@ -174,6 +181,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/buy': typeof SiteBuyRoute
   '/cancellation': typeof SiteCancellationRoute
   '/corporate': typeof SiteCorporateRoute
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/_admin': typeof AdminRouteWithChildren
   '/_site': typeof SiteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_site/buy': typeof SiteBuyRoute
   '/_site/cancellation': typeof SiteCancellationRoute
   '/_site/corporate': typeof SiteCorporateRoute
@@ -225,6 +234,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/sitemap.xml'
     | '/buy'
     | '/cancellation'
     | '/corporate'
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/sitemap.xml'
     | '/buy'
     | '/cancellation'
     | '/corporate'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/_admin'
     | '/_site'
     | '/auth'
+    | '/sitemap.xml'
     | '/_site/buy'
     | '/_site/cancellation'
     | '/_site/corporate'
@@ -298,11 +310,19 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   SiteRoute: typeof SiteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPaymentPhonepeInitiateRoute: typeof ApiPaymentPhonepeInitiateRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -525,8 +545,19 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   SiteRoute: SiteRouteWithChildren,
   AuthRoute: AuthRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPaymentPhonepeInitiateRoute: ApiPaymentPhonepeInitiateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
