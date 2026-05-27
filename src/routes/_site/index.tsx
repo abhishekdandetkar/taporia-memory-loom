@@ -191,20 +191,21 @@ function Home() {
       <section className="bg-white pb-32 md:pb-44">
         <div className="container-edge grid grid-cols-1 md:grid-cols-2 gap-px bg-black">
           <Reveal className="bg-white">
-            <img src={packaging} alt="Packaging" loading="lazy" width={1600} height={1200} className="w-full h-auto" />
+            <img src={packaging} alt="Handcrafted TAPORIA pendant packaging unboxing detail" loading="lazy" width={1600} height={1200} className="w-full h-auto" />
             <div className="p-10">
               <p className="text-eyebrow">Unboxing</p>
               <h3 className="text-display mt-6 text-3xl md:text-4xl">A ceremony, not a delivery.</h3>
             </div>
           </Reveal>
           <Reveal className="bg-white" delay={1}>
-            <img src={wornPortrait} alt="Worn" loading="lazy" width={1080} height={1920} className="w-full h-auto" />
+            <img src={wornPortrait} alt="Person wearing the TAPORIA pendant — lifestyle portrait" loading="lazy" width={1080} height={1920} className="w-full h-auto" />
             <div className="p-10">
               <p className="text-eyebrow">Worn</p>
               <h3 className="text-display mt-6 text-3xl md:text-4xl">Close to where it belongs.</h3>
             </div>
           </Reveal>
         </div>
+
       </section>
 
       {/* CTA */}
