@@ -53,7 +53,7 @@ function Why() {
           {PILLARS.map(([t, d], i) => (
             <Reveal key={t} className="bg-white p-10 md:p-14" delay={i % 3}>
               <div className="text-display text-5xl opacity-30">{String(i + 1).padStart(2, "0")}</div>
-              <h3 className="text-display mt-10 text-2xl">{t}</h3>
+              <h2 className="text-display mt-10 text-2xl">{t}</h2>
               <p className="mt-4 text-sm font-light opacity-80 leading-relaxed">{d}</p>
             </Reveal>
           ))}
@@ -63,7 +63,7 @@ function Why() {
       <section className="bg-black text-white py-32">
         <div className="container-edge grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           <Reveal className="lg:col-span-6">
-            <img src={wornPortrait} alt="Worn" loading="lazy" width={1080} height={1920} className="w-full h-auto" />
+            <img src={wornPortrait} alt="Worn TAPORIA pendant lifestyle portrait in black and white" loading="lazy" width={1080} height={1920} className="w-full h-auto" />
           </Reveal>
           <Reveal className="lg:col-span-6" delay={1}>
             <p className="text-eyebrow opacity-60">For The Moments That Matter</p>
@@ -81,10 +81,11 @@ function Why() {
       <section className="bg-white py-32">
         <div className="container-edge">
           <Reveal>
-            <img src={packaging} alt="Packaging" loading="lazy" width={1600} height={1200} className="w-full h-auto" />
+            <img src={packaging} alt="Handcrafted TAPORIA pendant packaging in monochrome" loading="lazy" width={1600} height={1200} className="w-full h-auto" />
           </Reveal>
         </div>
       </section>
     </div>
   );
 }
+
