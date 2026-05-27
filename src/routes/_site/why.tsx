@@ -6,14 +6,17 @@ import packaging from "@/assets/packaging.jpg";
 export const Route = createFileRoute("/_site/why")({
   head: () => ({
     meta: [
-      { title: "Why TAPORIA" },
-      { name: "description", content: "Some memories deserve more than a disappearing story. TAPORIA is a timeless keepsake made to outlast every gallery." },
+      { title: "Why TAPORIA — A Keepsake For Moments That Matter" },
+      { name: "description", content: "Some memories deserve more than a disappearing story. TAPORIA is a timeless handcrafted keepsake made to outlast every gallery, app, and phone." },
       { property: "og:title", content: "Why TAPORIA" },
       { property: "og:description", content: "A timeless keepsake. Made to outlast every gallery." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/why" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/why" }],
   }),
   component: Why,
 });
+
 
 const PILLARS = [
   ["Emotional", "Made for the people, the dates, the words you don't want forgotten."],

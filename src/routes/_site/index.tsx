@@ -12,13 +12,16 @@ export const Route = createFileRoute("/_site/")({
   head: () => ({
     meta: [
       { title: "TAPORIA — One Tap To Your Memories" },
-      { name: "description", content: "Handcrafted memory pendants. A timeless keepsake with a hidden NFC core. Only 100 pieces in the Founders Edition." },
+      { name: "description", content: "Handcrafted memory pendants with a hidden NFC core. A timeless stainless steel keepsake — only 100 pieces in the Founders Edition." },
       { property: "og:title", content: "TAPORIA — One Tap To Your Memories" },
       { property: "og:description", content: "Handcrafted memory pendants. Only 100 pieces in the Founders Edition." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/" }],
   }),
   component: Home,
 });
+
 
 function Home() {
   return (

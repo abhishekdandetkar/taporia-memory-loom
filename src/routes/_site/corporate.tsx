@@ -8,14 +8,17 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_site/corporate")({
   head: () => ({
     meta: [
-      { title: "Corporate Deals — TAPORIA" },
-      { name: "description", content: "Premium memory pendants for teams, milestones, and corporate gifting. Inquire for bulk orders." },
+      { title: "Corporate Gifting — TAPORIA Memory Pendants" },
+      { name: "description", content: "Premium handcrafted memory pendants for teams, milestones, and corporate gifting. Personalised, engraved, and quietly luxurious — inquire for bulk orders." },
       { property: "og:title", content: "TAPORIA — Corporate Gifting" },
       { property: "og:description", content: "A meaningful gift, not a giveaway." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/corporate" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/corporate" }],
   }),
   component: Corporate,
 });
+
 
 const schema = z.object({
   company_name: z.string().trim().min(2).max(150),

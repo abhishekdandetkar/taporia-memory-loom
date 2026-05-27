@@ -12,11 +12,16 @@ export const Route = createFileRoute("/_site/support")({
   head: () => ({
     meta: [
       { title: "Support — TAPORIA" },
-      { name: "description", content: "Get help with your TAPORIA order, delivery, or memory page." },
+      { name: "description", content: "Get help with your TAPORIA order, delivery, or memory page. Our team responds within 24 hours." },
+      { property: "og:title", content: "TAPORIA — Support" },
+      { property: "og:description", content: "We respond within 24 hours." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/support" },
     ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/support" }],
   }),
   component: Support,
 });
+
 
 const schema = z.object({
   name: z.string().trim().min(2).max(100),

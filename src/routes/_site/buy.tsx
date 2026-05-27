@@ -12,14 +12,38 @@ import wornPortrait from "@/assets/worn-portrait.jpg";
 export const Route = createFileRoute("/_site/buy")({
   head: () => ({
     meta: [
-      { title: "Buy TAPORIA — Founders Edition" },
-      { name: "description", content: "Reserve your TAPORIA pendant. Handcrafted stainless steel with a hidden NFC memory core. INR 4,999 — Founders Edition." },
+      { title: "Buy TAPORIA — Founders Edition Memory Pendant" },
+      { name: "description", content: "Reserve your TAPORIA pendant. Handcrafted stainless steel with a hidden NFC memory core. INR 4,999 — Founders Edition, limited to 100 pieces." },
       { property: "og:title", content: "TAPORIA — Founders Edition" },
       { property: "og:description", content: "Handcrafted memory pendant. Limited to 100 pieces." },
+      { property: "og:url", content: "https://taporia-memory-loom.lovable.app/buy" },
+      { property: "og:type", content: "product" },
+    ],
+    links: [{ rel: "canonical", href: "https://taporia-memory-loom.lovable.app/buy" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "TAPORIA Founders Edition Pendant",
+          description: "Handcrafted 316L stainless steel memory pendant with a hidden NFC core. Tap any smartphone to open a private memory page.",
+          brand: { "@type": "Brand", name: "TAPORIA" },
+          image: "https://taporia-memory-loom.lovable.app/og-buy.jpg",
+          offers: {
+            "@type": "Offer",
+            price: "4999",
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: "https://taporia-memory-loom.lovable.app/buy",
+          },
+        }),
+      },
     ],
   }),
   component: Buy,
 });
+
 
 const PRICE_INR = 4999;
 
