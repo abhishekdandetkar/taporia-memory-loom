@@ -55,45 +55,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TAPORIA" },
-      { name: "description", content: "TAPORIA crafts premium handcrafted stainless steel memory pendants with a hidden NFC core." },
+      { title: "TAPORIA — One Tap To Your Memories" },
+      { name: "description", content: "TAPORIA crafts premium memory pendants — handcrafted stainless steel jewelry with a hidden NFC core. One tap to relive your moments." },
       { name: "author", content: "TAPORIA" },
-      { property: "og:site_name", content: "TAPORIA" },
+      { property: "og:title", content: "TAPORIA — One Tap To Your Memories" },
+      { property: "og:description", content: "TAPORIA crafts premium memory pendants — handcrafted stainless steel jewelry with a hidden NFC core. One tap to relive your moments." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "TAPORIA — One Tap To Your Memories" },
+      { name: "twitter:description", content: "TAPORIA crafts premium memory pendants — handcrafted stainless steel jewelry with a hidden NFC core. One tap to relive your moments." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4c16208f-6fa5-4e68-91bf-477da31354cf" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4c16208f-6fa5-4e68-91bf-477da31354cf" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "Organization",
-              "@id": "https://taporia-memory-loom.lovable.app/#organization",
-              name: "TAPORIA",
-              url: "https://taporia-memory-loom.lovable.app",
-              description: "Handcrafted stainless steel memory pendants with a hidden NFC core.",
-            },
-            {
-              "@type": "WebSite",
-              "@id": "https://taporia-memory-loom.lovable.app/#website",
-              url: "https://taporia-memory-loom.lovable.app",
-              name: "TAPORIA",
-              publisher: { "@id": "https://taporia-memory-loom.lovable.app/#organization" },
-            },
-          ],
-        }),
-      },
-    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
