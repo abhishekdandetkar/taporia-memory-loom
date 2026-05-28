@@ -25,6 +25,7 @@ import { Route as SiteFaqsRouteImport } from './routes/_site/faqs'
 import { Route as SiteCorporateRouteImport } from './routes/_site/corporate'
 import { Route as SiteCancellationRouteImport } from './routes/_site/cancellation'
 import { Route as SiteBuyRouteImport } from './routes/_site/buy'
+import { Route as SiteAccountRouteImport } from './routes/_site/account'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
 import { Route as AdminAdminTicketsRouteImport } from './routes/_admin/admin.tickets'
 import { Route as AdminAdminReservationsRouteImport } from './routes/_admin/admin.reservations'
@@ -112,6 +113,11 @@ const SiteBuyRoute = SiteBuyRouteImport.update({
   path: '/buy',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteAccountRoute = SiteAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => SiteRoute,
+} as any)
 const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/account': typeof SiteAccountRoute
   '/buy': typeof SiteBuyRoute
   '/cancellation': typeof SiteCancellationRoute
   '/corporate': typeof SiteCorporateRoute
@@ -182,6 +189,7 @@ export interface FileRoutesByTo {
   '/': typeof SiteIndexRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/account': typeof SiteAccountRoute
   '/buy': typeof SiteBuyRoute
   '/cancellation': typeof SiteCancellationRoute
   '/corporate': typeof SiteCorporateRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/_site': typeof SiteRouteWithChildren
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_site/account': typeof SiteAccountRoute
   '/_site/buy': typeof SiteBuyRoute
   '/_site/cancellation': typeof SiteCancellationRoute
   '/_site/corporate': typeof SiteCorporateRoute
@@ -235,6 +244,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/sitemap.xml'
+    | '/account'
     | '/buy'
     | '/cancellation'
     | '/corporate'
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/sitemap.xml'
+    | '/account'
     | '/buy'
     | '/cancellation'
     | '/corporate'
@@ -284,6 +295,7 @@ export interface FileRouteTypes {
     | '/_site'
     | '/auth'
     | '/sitemap.xml'
+    | '/_site/account'
     | '/_site/buy'
     | '/_site/cancellation'
     | '/_site/corporate'
@@ -428,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteBuyRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/account': {
+      id: '/_site/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof SiteAccountRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_admin/admin/': {
       id: '/_admin/admin/'
       path: '/admin'
@@ -510,6 +529,7 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface SiteRouteChildren {
+  SiteAccountRoute: typeof SiteAccountRoute
   SiteBuyRoute: typeof SiteBuyRoute
   SiteCancellationRoute: typeof SiteCancellationRoute
   SiteCorporateRoute: typeof SiteCorporateRoute
@@ -525,6 +545,7 @@ interface SiteRouteChildren {
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
+  SiteAccountRoute: SiteAccountRoute,
   SiteBuyRoute: SiteBuyRoute,
   SiteCancellationRoute: SiteCancellationRoute,
   SiteCorporateRoute: SiteCorporateRoute,
@@ -551,3 +572,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
