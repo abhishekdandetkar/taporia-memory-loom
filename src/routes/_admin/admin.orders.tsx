@@ -23,7 +23,7 @@ function Orders() {
     },
   });
 
-  const update = async (id: string, patch: Record<string, any>) => {
+  const update = async (id: string, patch: any) => {
     const { error } = await supabase.from("orders").update(patch).eq("id", id);
     if (error) toast.error(error.message);
     else { toast.success("Updated"); qc.invalidateQueries({ queryKey: ["admin", "orders"] }); }
