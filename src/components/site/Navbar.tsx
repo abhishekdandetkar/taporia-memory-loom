@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { to: "/buy", label: "Buy" },
@@ -13,12 +14,15 @@ const NAV = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, s) => setSignedIn(!!s));
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    return () => { window.removeEventListener("scroll", onScroll); subscription.unsubscribe(); };
   }, []);
 
   return (
@@ -45,7 +49,10 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-6">
+          <Link to={signedIn ? "/account" : "/auth"} className="text-[11px] tracking-[0.28em] uppercase font-medium hover:opacity-60">
+            {signedIn ? "Account" : "Sign In"}
+          </Link>
           <Link
             to="/buy"
             className="btn-tap"

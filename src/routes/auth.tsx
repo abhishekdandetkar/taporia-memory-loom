@@ -26,8 +26,10 @@ function Auth() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin" });
+    supabase.auth.getSession().then(async ({ data }) => {
+      if (!data.session) return;
+      const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", data.session.user.id).eq("role", "admin").maybeSingle();
+      navigate({ to: r ? "/admin" : "/account" });
     });
   }, [navigate]);
 
@@ -52,7 +54,14 @@ function Auth() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Signed in.");
-        navigate({ to: "/admin" });
+        const { data: s } = await supabase.auth.getSession();
+        const uid = s.session?.user.id;
+        if (uid) {
+          const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", uid).eq("role", "admin").maybeSingle();
+          navigate({ to: r ? "/admin" : "/account" });
+        } else {
+          navigate({ to: "/account" });
+        }
       }
     } catch (err: any) {
       toast.error(err?.message ?? "Authentication failed");
