@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -46,8 +46,8 @@ function Tickets() {
             {isLoading && <tr><td colSpan={7} className="p-8 text-center opacity-50">Loading…</td></tr>}
             {!isLoading && data?.length === 0 && <tr><td colSpan={7} className="p-8 text-center opacity-50">No tickets yet.</td></tr>}
             {data?.map((r) => (
-              <>
-                <tr key={r.id} className="border-b border-black/20 cursor-pointer" onClick={() => setOpenId(openId === r.id ? null : r.id)}>
+              <Fragment key={r.id}>
+                <tr className="border-b border-black/20 cursor-pointer" onClick={() => setOpenId(openId === r.id ? null : r.id)}>
                   <td className="p-4 align-top font-light">{new Date(r.created_at).toLocaleDateString()}</td>
                   <td className="p-4 align-top font-light">{r.name}</td>
                   <td className="p-4 align-top font-light"><div>{r.email}</div>{r.order_id && <div className="text-xs opacity-60 mt-1">Order {r.order_id}</div>}</td>
@@ -64,11 +64,11 @@ function Tickets() {
                   </td>
                 </tr>
                 {openId === r.id && (
-                  <tr key={r.id + "-msg"} className="border-b border-black/20 bg-black text-white">
+                  <tr className="border-b border-black/20 bg-black text-white">
                     <td colSpan={7} className="p-6 font-light whitespace-pre-wrap">{r.message}</td>
                   </tr>
                 )}
-              </>
+              </Fragment>
             ))}
           </tbody>
         </table>
