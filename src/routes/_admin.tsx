@@ -1,4 +1,5 @@
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/_admin")({
 
 function AdminLayout() {
   const navigate = useNavigate();
+  const qc = useQueryClient();
   const [state, setState] = useState<"loading" | "ok" | "no-auth" | "no-role">("loading");
 
   useEffect(() => {
@@ -30,6 +32,44 @@ function AdminLayout() {
     });
     return () => subscription.unsubscribe();
   }, []);
+
+  // Warm all admin caches in parallel for instant navigation
+  useEffect(() => {
+    if (state !== "ok") return;
+    const prime = (key: string, table: string, order = "created_at") =>
+      qc.prefetchQuery({
+        queryKey: ["admin", key],
+        queryFn: async () => {
+          const { data, error } = await supabase.from(table as any).select("*").order(order, { ascending: false }).limit(500);
+          if (error) throw error; return data ?? [];
+        },
+      });
+    prime("orders", "orders");
+    prime("reservations", "reservations");
+    prime("leads", "corporate_leads");
+    prime("tickets", "support_tickets");
+    qc.prefetchQuery({
+      queryKey: ["admin-overview"],
+      queryFn: async () => {
+        const [o, r, l, t] = await Promise.all([
+          supabase.from("orders").select("id, payment_status, amount_inr"),
+          supabase.from("reservations").select("id"),
+          supabase.from("corporate_leads").select("id"),
+          supabase.from("support_tickets").select("id, status"),
+        ]);
+        const orders = o.data ?? [];
+        const paid = orders.filter((x) => x.payment_status === "paid");
+        return {
+          orders: orders.length,
+          paid: paid.length,
+          revenue: paid.reduce((s, x) => s + (x.amount_inr ?? 0), 0),
+          reservations: r.data?.length ?? 0,
+          leads: l.data?.length ?? 0,
+          openTickets: (t.data ?? []).filter((x) => x.status === "open").length,
+        };
+      },
+    });
+  }, [state, qc]);
 
   useEffect(() => {
     if (state === "no-auth") navigate({ to: "/auth" });
