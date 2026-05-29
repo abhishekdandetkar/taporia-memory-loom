@@ -17,7 +17,7 @@ function Card({ label, value }: { label: string; value: number | string }) {
   );
 }
 
-function Overview() {
+export function Overview() {
   const { data } = useQuery({
     queryKey: ["admin-overview"],
     queryFn: async () => {

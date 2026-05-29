@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_admin/admin/reservations")({
 
 const STATUS = ["waiting", "contacted", "converted", "cancelled"];
 
-function Reservations() {
+export function Reservations() {
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "reservations"],

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_admin/admin/leads")({
 
 const STATUS = ["new", "qualified", "proposal", "won", "lost"];
 
-function Leads() {
+export function Leads() {
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "leads"],

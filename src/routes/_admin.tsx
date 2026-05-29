@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_admin")({
 });
 
 
-function AdminLayout() {
+export function AdminLayout() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [state, setState] = useState<"loading" | "ok" | "no-auth" | "no-role">("loading");
