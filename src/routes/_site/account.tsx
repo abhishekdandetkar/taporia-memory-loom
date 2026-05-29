@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_site/account")({
   component: Account,
 });
 
-function Account() {
+export function Account() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [userId, setUserId] = useState<string | null>(null);

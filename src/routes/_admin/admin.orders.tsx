@@ -12,7 +12,7 @@ const PAYMENT = ["pending", "paid", "failed", "refunded"];
 const ORDER = ["placed", "confirmed", "shipped", "delivered", "cancelled"];
 const MEMORY = ["awaiting", "in_progress", "ready", "delivered"];
 
-function Orders() {
+export function Orders() {
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "orders"],

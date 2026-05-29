@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_admin/admin/tickets")({
 
 const STATUS = ["open", "in_progress", "resolved", "closed"];
 
-function Tickets() {
+export function Tickets() {
   const qc = useQueryClient();
   const [openId, setOpenId] = useState<string | null>(null);
   const { data, isLoading } = useQuery({

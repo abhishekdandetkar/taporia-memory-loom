@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_admin/admin/cms")({
 });
 
 
-function CMS() {
+export function CMS() {
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({ queryKey: ["cms"], queryFn: async () => {
     const { data, error } = await supabase.from("cms_content").select("*").order("section_key");

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/_admin/admin/memories")({
   component: Memories,
 });
 
-function Memories() {
+export function Memories() {
   const qc = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["memories"],
