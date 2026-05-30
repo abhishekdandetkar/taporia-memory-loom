@@ -20,17 +20,46 @@ export function AdminLayout() {
   const [state, setState] = useState<"loading" | "ok" | "no-auth" | "no-role">("loading");
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_e, session) => {
+    let cancelled = false;
+
+    const checkRole = async (userId: string) => {
+      try {
+        const { data, error } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", userId)
+          .eq("role", "admin")
+          .maybeSingle();
+        if (cancelled) return;
+        if (error) {
+          console.error("[admin] role check failed:", error);
+          setState("no-role");
+          return;
+        }
+        setState(data ? "ok" : "no-role");
+      } catch (err) {
+        console.error("[admin] role check threw:", err);
+        if (!cancelled) setState("no-role");
+      }
+    };
+
+    // CRITICAL: never `await` Supabase queries inside onAuthStateChange — it
+    // holds an internal auth lock and deadlocks. Defer with setTimeout(0).
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
       if (!session) { setState("no-auth"); return; }
-      const { data } = await supabase.from("user_roles").select("role").eq("user_id", session.user.id).eq("role", "admin").maybeSingle();
-      setState(data ? "ok" : "no-role");
+      setTimeout(() => { void checkRole(session.user.id); }, 0);
     });
-    supabase.auth.getSession().then(async ({ data }) => {
+
+    supabase.auth.getSession().then(({ data }) => {
+      if (cancelled) return;
       if (!data.session) { setState("no-auth"); return; }
-      const { data: r } = await supabase.from("user_roles").select("role").eq("user_id", data.session.user.id).eq("role", "admin").maybeSingle();
-      setState(r ? "ok" : "no-role");
+      void checkRole(data.session.user.id);
+    }).catch((err) => {
+      console.error("[admin] getSession failed:", err);
+      if (!cancelled) setState("no-auth");
     });
-    return () => subscription.unsubscribe();
+
+    return () => { cancelled = true; subscription.unsubscribe(); };
   }, []);
 
   // Warm all admin caches in parallel for instant navigation
